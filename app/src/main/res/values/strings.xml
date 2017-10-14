@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AcronymRecall</string>
+    <string name="title_activity_words">WordsActivity</string>
+    <string name="title_activity_choices">ChoicesActivity</string>
+    <string name="label_Key_Words">Key Words</string>
+    <string name="validation_msg_1">Need at least</string>
+    <string name="validation_msg_2">words!</string>
+    <string name="label_Your_Choices">Your Choices!</string>
+    <string name="owl_speech_default">Enter your key words in the boxes above!</string>
+</resources>
