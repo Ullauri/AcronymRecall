@@ -53,10 +53,8 @@ public class WordsActivity extends AppCompatActivity {
         tableLayoutKeyWords = (TableLayout) findViewById(R.id.tableLayoutKeyWords);
         imageButtonAddKeyWord = (ImageButton) findViewById(R.id.imageButtonAddKeyWord);
 
-        for (int i = 0; i < MIN_KEYWORD_COUNT; i++) {
-            TableRow tableRow = createDefaultRow();
-            tableLayoutKeyWords.addView(tableRow);
-        }
+        for (int i = 0; i < MIN_KEYWORD_COUNT; i++)
+            tableLayoutKeyWords.addView(createDefaultRow());
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.bringToFront();
@@ -70,9 +68,8 @@ public class WordsActivity extends AppCompatActivity {
                     String keyWord = ((EditText) currentRow.getChildAt(1)).getText().toString();
                     keyWord = keyWord.trim().toLowerCase();
 
-                    if (!keyWord.equals("")) {
+                    if (!keyWord.equals(""))
                         keyWords.add(keyWord);
-                    }
                 }
 
                 if (keyWords.size() >= MIN_KEYWORD_COUNT) {
@@ -152,9 +149,8 @@ public class WordsActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (editText.getText().toString().trim().length() > 0) {
+                if (editText.getText().toString().trim().length() > 0)
                     timeoutHandler.postDelayed(typingRunnable, TYPING_TIMEOUT);
-                }
             }
         });
 

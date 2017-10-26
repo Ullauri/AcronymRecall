@@ -10,12 +10,17 @@ import java.util.ArrayList;
 
 public enum AcronymUtil {
     INSTANCE;
-    private AcronymWordFinder anagramsDictionary;
+
+
+    private ArrayList<AcronymWordFinder> acronymWordFinders;
 
 
     public void init(InputStreamReader inputStreamReader) {
+        acronymWordFinders = new ArrayList<>();
+
         try {
-            anagramsDictionary = new AnagramsDictionary(inputStreamReader);
+            acronymWordFinders.add(new AnagramsDictionary(inputStreamReader));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,8 +39,10 @@ public enum AcronymUtil {
         ArrayList<String> choices = new ArrayList<>();
         String acronym = getAcronym(keyWords);
 
-        choices.addAll(anagramsDictionary.getWords(acronym));
-
+        for (AcronymWordFinder acronymWordFinder : acronymWordFinders) {
+            choices.addAll(acronymWordFinder.getWords(acronym));
+        }
+        
         return choices;
     }
 

@@ -14,8 +14,8 @@ import java.util.Map;
  */
 
 public final class AnagramsDictionary implements AcronymWordFinder {
-    private static final boolean BLOCK_SINGLE_LETTERS = true;
-    private static final boolean BLOCK_SWAPPED_WORDS = true;
+//    private static final boolean BLOCK_SINGLE_LETTERS = true;
+//    private static final boolean BLOCK_SWAPPED_WORDS = true;
     private static final String DELIMITER = ";";
     private Map<String, ArrayList<String>> anagrams;
 
@@ -50,7 +50,7 @@ public final class AnagramsDictionary implements AcronymWordFinder {
 
         if (anagrams.containsKey(acronym)) {
             for (String word : anagrams.get(acronym)) {
-                word = word.substring(0,1).toUpperCase() + word.substring(1);
+                word = word.substring(0, 1).toUpperCase() + word.substring(1);
                 choices.add(word);
             }
         }
@@ -65,20 +65,22 @@ public final class AnagramsDictionary implements AcronymWordFinder {
                 String chunk1 = acronym.substring(k, k + i);
                 String chunk2 = acronym.replace(chunk1, "");
 
-                if (BLOCK_SINGLE_LETTERS)
-                    if (chunk1.length() <= 1 || chunk2.length() <= 1 && !chunk1.equals("i"))
-                        continue;
+//                if (BLOCK_SINGLE_LETTERS)
+//                    if (chunk1.length() <= 1 || chunk2.length() <= 1 && !chunk1.equals("i"))
+//                        continue;
 
                 split_acronym = chunk1 + DELIMITER + chunk2;
 
-                if (BLOCK_SWAPPED_WORDS) {
-                    String swap = chunk2 + DELIMITER + chunk1;
-                    if (!acronym_splits.contains(swap))
-                        acronym_splits.add(split_acronym);
-                }
-                else {
-                    acronym_splits.add(split_acronym);
-                }
+//                if (BLOCK_SWAPPED_WORDS) {
+//                    String swap = chunk2 + DELIMITER + chunk1;
+//                    if (!acronym_splits.contains(swap))
+//                        acronym_splits.add(split_acronym);
+//                }
+//                else {
+//                    acronym_splits.add(split_acronym);
+//                }
+
+                acronym_splits.add(split_acronym);
             }
         }
 

@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
 
             AcronymUtil util = AcronymUtil.INSTANCE;
             util.init(inputStreamReader);
-            Thread.sleep(200);
+            Thread.sleep(2000);
         } catch (IOException e) {
             System.err.println("Words File Not Found For: " + locale);
             e.printStackTrace();
