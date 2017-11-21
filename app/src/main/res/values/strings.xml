@@ -7,4 +7,15 @@
     <string name="validation_msg_2">words!</string>
     <string name="label_Your_Choices">Your Choices!</string>
     <string name="owl_speech_default">Enter your key words in the boxes above!</string>
+    <string name="description_image_owl">a standing owl</string>
+    <string name="description_image_speechbubble">the owl\'s speech bubble</string>
+    <string name="description_image_addkeyword">click to add a keyword</string>
+    <string name="owl_speech_choice">Choose an acronym you like!</string>
+    <string name="file_acronyms">com.gmail.byron.ullauri.myAcronyms</string>
+    <string name="constant_delimiter">;</string>
+    <string name="menu_study">Study</string>
+    <string name="menu_create_acronym">Create\nAcronym</string>
+    <string name="menu_my_acronyms">My\nAcronyms</string>
+    <string name="menu_info">Info</string>
+    <string name="description_study">study</string>
 </resources>

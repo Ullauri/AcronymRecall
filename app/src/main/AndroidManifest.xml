@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize">
-        <!--ADDED THIS  ^  -->
+
+        <!-- ADDED THIS  ^ -->
 
         <activity
             android:name=".SplashActivity"
@@ -28,7 +29,8 @@
         <activity
             android:name=".ChoicesActivity"
             android:label="@string/title_activity_choices"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MenuActivity"></activity>
     </application>
 
 </manifest>

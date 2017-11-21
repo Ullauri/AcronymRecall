@@ -1,9 +1,11 @@
 package com.gmail.byron.ullauri.acronymrecall;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,8 +35,16 @@ public class SplashActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+        Intent intent;
 
-        Intent intent = new Intent(this, WordsActivity.class);
+        if (preferences.getBoolean("isFirstTime", false)) {
+            intent = new Intent(this, MenuActivity.class);
+        } else {
+            preferences.edit().putBoolean("isFirstTime", true).apply();
+            intent = new Intent(this, WordsActivity.class);
+        }
+
         startActivity(intent);
         finish();
     }
