@@ -1,11 +1,11 @@
 package com.gmail.byron.ullauri.acronymrecall;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -15,13 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 
-public class ChoicesActivity extends AppCompatActivity {
+
+public class ChoicesActivity extends Activity {
     private AcronymUtil acronymUtil;
-    private ArrayList<String> keyWords;
+    private String keyWordsJoin;
     private ArrayList<String> choices;
     private TableLayout tableLayoutChoices;
 
@@ -32,7 +31,12 @@ public class ChoicesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choices);
 
         Intent intent = getIntent();
-        keyWords = intent.getStringArrayListExtra(WordsActivity.EXTRA_KEYWORDS);
+        ArrayList<String> keyWords = intent.getStringArrayListExtra(WordsActivity.EXTRA_KEYWORDS);
+        keyWordsJoin = "";
+        String DELIMITER = getString(R.string.constant_delimiter);
+
+        for (String keyword : keyWords)
+            keyWordsJoin += keyword + DELIMITER;
 
         acronymUtil = AcronymUtil.INSTANCE;
         choices = acronymUtil.getAcronymWords(keyWords);
@@ -51,27 +55,8 @@ public class ChoicesActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     final String choice = ((TextView) v).getText().toString();
-                    String result = "";
 
-                    for (char letter : choice.toCharArray()) {
-                        if (letter == ' ')
-                            continue;
-
-                        letter = Character.toLowerCase(letter);
-                        result += Character.toUpperCase(letter) + ": ";
-
-                        for (String keyword : keyWords) {
-                            if (keyword.charAt(0) == letter) {
-                                result += keyword;
-                                keyWords.remove(keyword);
-                                break;
-                            }
-                        }
-
-                        result += "\n";
-                    }
-
-                    final AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+                    new AlertDialog.Builder(ChoicesActivity.this)
                             .setTitle("Add Acronym")
                             .setMessage("Do you want to save this acronym?")
                             .setPositiveButton("Save", new DialogInterface.OnClickListener() {
@@ -81,18 +66,12 @@ public class ChoicesActivity extends AppCompatActivity {
                                             getString(R.string.file_acronyms), Context.MODE_PRIVATE);
 
                                     if (acronymsFile.getString(choice, "").isEmpty()) {
-                                        String keywordsJoin = "";
-                                        String DELIMITER = getString(R.string.constant_delimiter);
-
-                                        for (String keyword : keyWords) {
-                                            keywordsJoin += keyword + DELIMITER;
-                                        }
-
                                         acronymsFile.edit()
-                                        .putString(choice, keywordsJoin)
-                                        .apply();
+                                                .putString(choice, keyWordsJoin)
+                                                .apply();
 
-
+                                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                                        finish();
                                     } else {
                                         Toast.makeText(getApplicationContext(), choice + " is already in use!", Toast.LENGTH_LONG).show();
                                     }

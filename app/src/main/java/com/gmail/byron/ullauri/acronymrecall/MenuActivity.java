@@ -26,7 +26,7 @@ public class MenuActivity extends AppCompatActivity {
                 break;
             case R.id.imageViewAcronyms:
             case R.id.textViewAcronyms:
-                
+                startActivity(new Intent(this, AcronymsActivity.class));
                 break;
             case R.id.imageViewInfo:
             case R.id.textViewInfo:
